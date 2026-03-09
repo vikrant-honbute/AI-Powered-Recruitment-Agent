@@ -24,9 +24,9 @@ jobs:
         run: |
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions"
-          git clone https://huggingface.co/spaces/viki77/viki77/AI-Powered_Recruitment_Agent space_repo
+          git clone https://viki77:${HF_TOKEN}@huggingface.co/spaces/viki77/AI-Powered_Recruitment_Agent space_repo
           rsync -av --exclude='.git' . space_repo/
           cd space_repo
           git add .
-          git commit -m "Deploy from GitHub Actions"
-          git push https://huggingface.co/viki77/viki77/AI-Powered_Recruitment_Agent.git HEAD:main
+          git commit -m "Deploy from GitHub Actions" || echo "No changes to commit"
+          git push https://viki77:${HF_TOKEN}@huggingface.co/spaces/viki77/AI-Powered_Recruitment_Agent.git HEAD:main
